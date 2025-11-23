@@ -1,4 +1,4 @@
-// pages/[code].tsx
+
 import { GetServerSideProps } from "next";
 import pool from "../lib/db";
 

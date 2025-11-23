@@ -56,9 +56,7 @@ export default function Home() {
     if (!query) return links;
     const q = query.toLowerCase();
     return links.filter(
-      (l) =>
-        l.code.toLowerCase().includes(q) ||
-        l.url.toLowerCase().includes(q)
+      (l) => l.code.toLowerCase().includes(q) || l.url.toLowerCase().includes(q)
     );
   }, [links, query]);
 
@@ -109,7 +107,7 @@ export default function Home() {
         method: "DELETE",
       });
 
-        if (res.status === 204) {
+      if (res.status === 204) {
         setSuccess("Deleted");
         setRefreshFlag((f) => f + 1);
       } else {
@@ -126,16 +124,11 @@ export default function Home() {
     setSuccess("Copied to clipboard");
   };
 
-  const pageItems = filtered.slice(
-    (page - 1) * PAGE_SIZE,
-    page * PAGE_SIZE
-  );
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <div className="min-h-screen p-8 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a]">
       <div className="max-w-6xl mx-auto">
-
-        {/* Header — White Glass */}
         <header className="backdrop-blur-xl bg-white/20 border border-white/30 rounded-3xl shadow-2xl p-8 mb-10">
           <div className="flex items-center justify-between flex-wrap gap-6">
             <div>
@@ -157,13 +150,8 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Main layout */}
         <main className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-          {/* LEFT CONTENT: White Glass */}
           <section className="md:col-span-2 space-y-8">
-
-            {/* Form */}
             <form
               onSubmit={handleSubmit}
               className="backdrop-blur-xl bg-white/25 border border-white/40 rounded-3xl shadow-xl p-6"
@@ -173,7 +161,6 @@ export default function Home() {
               </h2>
 
               <div className="space-y-4">
-                {/* Long URL */}
                 <div>
                   <label className="block text-white/80 text-sm mb-1">
                     Long URL
@@ -187,7 +174,6 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Custom code */}
                 <div>
                   <label className="block text-white/80 text-sm mb-1">
                     Custom Code (optional)
@@ -200,7 +186,6 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Buttons */}
                 <button
                   type="submit"
                   disabled={loading}
@@ -214,12 +199,9 @@ export default function Home() {
               </div>
             </form>
 
-            {/* Link Table */}
             <div className="backdrop-blur-xl bg-white/25 border border-white/40 rounded-3xl shadow-xl p-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold text-white">
-                  Your Links
-                </h3>
+                <h3 className="text-xl font-semibold text-white">Your Links</h3>
                 <input
                   placeholder="Search…"
                   className="px-3 py-2 rounded-xl bg-white/70 text-gray-900 border border-white/40 text-sm"
@@ -253,7 +235,10 @@ export default function Home() {
                             className="border-b border-white/10 hover:bg-white/10 transition"
                           >
                             <td className="py-3">
-                              <a className="text-blue-300" href={`/code/${l.code}`}>
+                              <a
+                                className="text-blue-300"
+                                href={`/code/${l.code}`}
+                              >
                                 {l.code}
                               </a>
                             </td>
@@ -295,11 +280,11 @@ export default function Home() {
                     </table>
                   </div>
 
-                  {/* Pagination */}
                   <div className="flex justify-between items-center text-white/80 text-sm mt-4">
                     <span>
-                      Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, filtered.length)}
-                      {" "}of {filtered.length}
+                      Showing {(page - 1) * PAGE_SIZE + 1}–
+                      {Math.min(page * PAGE_SIZE, filtered.length)} of{" "}
+                      {filtered.length}
                     </span>
 
                     <div className="flex items-center gap-2">
@@ -314,7 +299,9 @@ export default function Home() {
                         Page {page}/{totalPages}
                       </div>
                       <button
-                        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                        onClick={() =>
+                          setPage((p) => Math.min(totalPages, p + 1))
+                        }
                         disabled={page === totalPages}
                         className="px-3 py-1 rounded-lg bg-white/20 border border-white/30 disabled:opacity-40 hover:bg-white/30"
                       >
@@ -327,10 +314,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* RIGHT SIDEBAR — DARK GLASS */}
           <aside className="space-y-8">
-
-            {/* Top Links chart */}
             <div className="backdrop-blur-xl bg-black/30 border border-white/20 rounded-3xl shadow-xl p-6 text-white">
               <h3 className="text-lg font-semibold mb-4">Top Links</h3>
 
@@ -345,7 +329,9 @@ export default function Home() {
                       <div key={t.code}>
                         <div className="flex justify-between mb-1">
                           <span className="text-white/90">{t.code}</span>
-                          <span className="text-white/70 text-sm">{t.clicks}</span>
+                          <span className="text-white/70 text-sm">
+                            {t.clicks}
+                          </span>
                         </div>
                         <div className="w-full bg-white/20 rounded-full h-2">
                           <div
@@ -360,7 +346,6 @@ export default function Home() {
               )}
             </div>
 
-            {/* Quick Actions */}
             <div className="backdrop-blur-xl bg-black/30 border border-white/20 rounded-3xl shadow-xl p-6 text-white">
               <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
 
@@ -383,7 +368,7 @@ export default function Home() {
                 </button>
 
                 <a
-                  href="/api/links"
+                  href="/links"
                   target="_blank"
                   className="px-4 py-2 rounded-xl text-center bg-white/20 hover:bg-white/30 border border-white/30"
                 >
